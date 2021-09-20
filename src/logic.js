@@ -1,10 +1,53 @@
-import { compareAsc, format } from 'date-fns';
 
-format(new Date(2014, 1, 11), 'yyyy-MM-dd') //=> '2014-02-11'
+const logicModule = (function(){
 
-const dates = [
-    new Date(1995, 6, 2),
-    new Date(1987, 1, 11),
-    new Date(1989, 6, 10),
-  ]
+  const toDo = (idToDo, titleToDo, descriptionToDo, dueDateToDo, priorityToDo, checkToDo) =>{
+    const state ={
+      id: idToDo,
+      title: titleToDo,
+      description: descriptionToDo,
+      dueDate: dueDateToDo,
+      priority: priorityToDo,
+      check: checkToDo
+    }
 
+    const modifyToDo = (titleToDo, descriptionToDo, dueDateToDo, priorityToDo, checkToDo)=>{
+      this.state.title = titleToDo;
+      this.state.description = descriptionToDo;
+      this.state.dueDate = dueDateToDo;
+      this.state.priority = priorityToDo;
+      this.state.check = checkToDo; 
+    }
+
+    return{state, modifyToDo}
+  }
+
+  const projectToDo = (titleProject, descriptionProject) =>{
+    const state ={
+      title: titleProject,
+      description: descriptionProject,
+      toDoObjects:[],
+    }
+
+    const addToDoObject = (idToDo,titleToDo, descriptionToDo, dueDateToDo, priorityToDo, checkToDo)=>{
+      state.toDoObjects.append(toDo(idToDo, titleToDo, descriptionToDo, dueDateToDo, priorityToDo, checkToDo));
+    }
+
+    const deleteToDoObject = (idToDo) =>{
+      for(i = 0; i < toDoObjects.length; i++){
+        if(idToDo === i + 1){
+          toDoObjects.splice(0, i);
+        }
+      }
+    }
+
+    return{state, addToDoObject, deleteToDoObject}
+  }
+
+
+  return{toDo, projectToDo}
+ 
+})();
+
+
+export default logicModule;
